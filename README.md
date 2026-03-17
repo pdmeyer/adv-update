@@ -3,6 +3,10 @@
 Updates Ableton Live `.adv` device preset files so they reference a device (`.amxd`) by relative path instead of absolute, and optionally checks for remaining absolute paths.
 
 ## Usage
+Grant execute permissions to the script.
+```bash
+chmod +x adv_update.sh
+```
 
 ```bash
 ./adv_update.sh <path> <device.amxd> [1|3]
