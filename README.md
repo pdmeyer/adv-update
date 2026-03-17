@@ -1,8 +1,8 @@
 # ADV preset path updater
 
-Updates Ableton Live `.adv` device preset files so they reference a device (`.amxd`) by relative path instead of absolute, and optionally checks for remaining absolute paths. 
+Updates Ableton Live `.adv` device preset files so they reference a Max for Live device (`.amxd`) by a relative instead of absolute path.
 
-This is useful when distributing Max for Live devices with presets. Normally, presets are linked to the Max for Live device using an absolute path to the device file. However, it is possible to link Live to connect the preset to the device via a relative reference by editing the `.adv` file, which is in XML format.
+This is useful when distributing Max for Live devices with presets. Normally, presets are linked to the Max for Live device using an absolute path to the device file. However, it is possible to link Live to connect the preset to the device via a relative reference by editing the `.adv` file, which is in XML format. Once the `.adv` file is updated, the preset will be linked to the device via a relative reference. This allows the user to move the device and presets (together, but not separately!) to a different location without breaking the link.
 
 Thanks to Mattijs Kneppers for documenting this process. To learn more, see his [post on the Cycling '74 Forum](https://cycling74.com/forums/embedding-adv-presets-with-a-max-for-live-amxd-or-how-to-send-device-to-someone-else-with-presets#reply-61113ecf7c499450d12c2469).
 
