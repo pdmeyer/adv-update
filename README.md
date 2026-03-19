@@ -35,7 +35,9 @@ Run the script.
 ```
 
 ## What it does
-
 1. Decompresses the file if it is gzipped (in place).
-2. In the ADV XML: sets `RelativePathType` to the given value (default 3), sets `RelativePath` to the device filename, and removes `<Path Value="..." />` and `<Type Value="..." />` lines.
-3. Scans the file for stray absolute paths (lines containing `<Path Value="/Users` or `<BrowserContentPath Value=".../Users`) and prints a warning with line numbers if found. The script still exits 0; this is informational.
+2. In the ADV XML: 
+    - sets `RelativePathType` to the given value (default 3)
+    - sets `RelativePath` to the device filename
+    - removes `<Path Value="..." />` and `<Type Value="..." />` lines.
+3. Scans the XML for stray absolute paths (lines containing `<Path Value="/Users` or `<BrowserContentPath Value=".../Users`) and prints a warning with line numbers if found. The script still exits 0; this is informational.
