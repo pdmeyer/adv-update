@@ -9,12 +9,12 @@ Thanks to Mattijs Kneppers for documenting this process. To learn more, see his 
 ## Usage
 Grant execute permissions to the script. (You only need to do this once.)
 ```bash
-chmod +x adv_update.sh
+chmod +x adv-update.sh
 ```
 
 Run the script.
 ```bash
-./adv_update.sh <path> <device.amxd> [1|3]
+./adv-update.sh <path> <device.amxd> [1|3]
 ```
 
 - **path**: Absolute path to a single `.adv` file or a folder of `.adv` files.
@@ -25,13 +25,13 @@ Run the script.
 
 ```bash
 # Single preset
-./adv_update.sh "/path/to/Preset Name.adv" "MyDevice.amxd"
+./adv-update.sh "/path/to/Preset Name.adv" "MyDevice.amxd"
 
 # All presets in a folder
-./adv_update.sh "/path/to/Presets/" "MyDevice.amxd"
+./adv-update.sh "/path/to/Presets/" "MyDevice.amxd"
 
 # Use RelativePathType 1
-./adv_update.sh "/path/to/Presets/" "MyDevice.amxd" 1
+./adv-update.sh "/path/to/Presets/" "MyDevice.amxd" 1
 ```
 
 ## What it does
