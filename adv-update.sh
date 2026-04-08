@@ -42,18 +42,31 @@ check_stray_absolute_paths() {
     fi
 }
 
+# Escape a string for use as a literal in sed's LHS (BRE). AMXD is expected to be a basename like Foo.amxd.
+amxd_sed_lhs_escape() {
+    printf '%s' "$1" | sed 's/[.[\\*^$.]/\\&/g'
+}
+
 process_adv() {
     local f="$1"
+    local amxd_lhs
+    amxd_lhs=$(amxd_sed_lhs_escape "$AMXD")
     # Decompress if gzipped
     if file "$f" | grep -q gzip; then
         gunzip -c "$f" > "$f.tmp" && mv "$f.tmp" "$f"
     fi
     # Apply edits
+    # Collapse any non-empty RelativePath that points at this device (path ending in /basename.amxd)
+    # to just the basename. Leaves .adv chain refs and other RelativePath values unchanged.
+    # Do NOT delete every <Type Value="..."/> line: FileRef uses Type, but so does every
+    # MxD*Parameter (float/int/enum). A global Type delete strips parameter types and Live
+    # falls back to defaults. Only strip absolute <Path> lines under FileRef (portability).
     sed -i '' \
       -e 's|<RelativePathType Value="0" />|<RelativePathType Value="'"$REL_PATH_TYPE"'" />|' \
+      -e "s|<RelativePath Value=\"\\(.*\\)/${amxd_lhs}\" />|<RelativePath Value=\"${AMXD}\" />|" \
       -e 's|<RelativePath Value="" />|<RelativePath Value="'"$AMXD"'" />|' \
-      -e '/<Path Value=".*" \/>/d' \
-      -e '/<Type Value=".*" \/>/d' \
+      -e '/^[[:space:]]*<Path Value="\//d' \
+      -e '/^[[:space:]]*<Path Value="[A-Za-z]:\\/d' \
       "$f"
     echo "Done: $f now references $AMXD relatively"
     check_stray_absolute_paths "$f"
